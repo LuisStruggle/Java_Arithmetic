@@ -1,0 +1,29 @@
+import java.util.Scanner;
+
+public class SolutionOne
+{
+
+    /**
+     * 有六种字符，‘(’，‘)’，‘[’，‘]’，‘{’，‘}’，看是否满足对称。即：'()[{}]()[]'满足，而'()[{]}'不满足
+     */
+    public static void main(String[] args)
+    {
+        // 获取输入的字符串
+        Scanner sc = new Scanner(System.in);
+        String str = sc.nextLine();
+
+        // 定义一个标识判断标识
+        boolean flag = false;
+
+        // 判断是否只包含上述6中字符，并且字符是否为偶数个或则字符长度为0
+        if (!str.matches("^[\\[|\\]|\\(|\\)|\\{|\\}]*$") || ((str.length()) % 2) != 0 || (str.length()) == 0)
+        {
+            System.out.println(flag);
+        }
+        else
+        {
+            // 将六种字符转为相应的数字，方便匹配
+            char[] ch = str.toCharArray();
+        }
+    }
+}
