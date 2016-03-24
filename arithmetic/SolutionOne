@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Solution
+public class SolutionOne
 {
     /**
      * 有六种字符，‘(’，‘)’，‘[’，‘]’，‘{’，‘}’，看是否满足对称。即：'()[{}]()[]'满足，而'()[{]}'不满足
@@ -29,10 +29,11 @@ public class Solution
             // 索引结束位置
             int end = 1;
             // 最大索引
-            int indexMax = 1;
+            int indexMax = ch.length - 1;
 
             flag = isMatch(ch, start, end, indexMax);
 
+            System.out.println(flag);
         }
     }
 
@@ -43,7 +44,7 @@ public class Solution
         // 计数器
         int i = 0;
 
-        while (indexMax < ch.length)
+        while (!flag && end < ch.length)
         {
             if (ch[end] == ch[start])
             {
@@ -56,19 +57,34 @@ public class Solution
                 {
                     if (i == 0)
                     {
-                        if ((start - end - 1) % 2 == 0)
+                        if ((end - start - 1) % 2 == 0)
                         {
-                            if (start - end == 1)
+                            if (end - start == 1)
                             {
-                                start = indexMax + 1;
-                                end = indexMax + 2;
-                                indexMax = end;
-                                flag = true;
+                                if (end != indexMax)
+                                {
+                                    flag = isMatch(ch, end + 1, end + 2, indexMax);
+                                }
+                                else
+                                {
+                                    flag = true;
+                                }
                             }
                             else
                             {
                                 // 递归（满足匹配返回true，否则false）
-                                flag = isMatch(ch, start + 1, start + 2, indexMax);
+                                flag = isMatch(ch, start + 1, start + 2, end - 1);
+
+                                if (end != indexMax && flag)
+                                {
+                                    flag = isMatch(ch, end + 1, end + 2, indexMax);
+                                }
+                            }
+                            
+                            if (!flag)
+                            {
+                                flag = false;
+                                break;
                             }
                         }
                         else
@@ -84,10 +100,6 @@ public class Solution
                 }
             }
             end++;
-            if (indexMax < end)
-            {
-                indexMax = end;
-            }
         }
         return flag;
     }
