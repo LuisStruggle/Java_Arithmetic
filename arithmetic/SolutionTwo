@@ -19,26 +19,26 @@ public class Solution
         int count = 1;
 
         // 定义一个数组，用于保存丑数
-        int[] target = new int[n + 1];
+        long[] target = new long[n + 1];
 
         target[0] = 0;
         target[1] = 1;
 
-        int two = 0, three = 0, five = 0;
+        long two = 0, three = 0, five = 0;
 
         while (count < n)
         {
             for (int j = 1; j <= count; j++)
             {
-                if (2 * target[j - 1] <= target[count] && 2 * target[j] >= target[count])
+                if (2 * target[j - 1] <= target[count] && 2 * target[j] > target[count])
                 {
                     two = 2 * target[j];
                 }
-                if (3 * target[j - 1] <= target[count] && 3 * target[j] >= target[count])
+                if (3 * target[j - 1] <= target[count] && 3 * target[j] > target[count])
                 {
                     three = 3 * target[j];
                 }
-                if (5 * target[j - 1] <= target[count] && 5 * target[j] >= target[count])
+                if (5 * target[j - 1] <= target[count] && 5 * target[j] > target[count])
                 {
                     five = 5 * target[j];
                 }
@@ -59,14 +59,14 @@ public class Solution
                 count++;
             }
         }
-        return target[n];
+        return (int) target[n];
     }
 
     public static void main(String[] args)
     {
         Solution s = new Solution();
 
-        System.out.println(s.nthUglyNumber(0));
+        System.out.println(s.nthUglyNumber(1650));
     }
 
 }
